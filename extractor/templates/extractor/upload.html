@@ -1,0 +1,22 @@
+<!-- extractor/templates/extractor/upload.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Text Extractor</title>
+</head>
+<body>
+    <h1>Upload PDF</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="pdf_file" accept="application/pdf" required>
+        <button type="submit">Upload and Extract</button>
+    </form>
+
+    {% if message %}
+    <h2>{{ message }}</h2>
+    {% endif %}
+
+    <!-- Add button to visit PDF Details page -->
+    <p><a href="{% url 'pdf_details' %}"><button>View Extracted Content</button></a></p>
+</body>
+</html>

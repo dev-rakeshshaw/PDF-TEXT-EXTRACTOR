@@ -1,0 +1,38 @@
+<!-- extractor/templates/extractor/pdf_details.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Extracted PDF Content</title>
+</head>
+<body>
+    <h1>All Extracted PDF Content</h1>
+
+    <p><a href="{% url 'upload_pdf' %}"><button>Upload Another PDF</button></a></p>
+
+    <!-- Add a Delete All button -->
+    <form method="POST" action="{% url 'delete_all_records' %}">
+        {% csrf_token %}
+        <button type="submit" style="color: red;">Delete All Records</button>
+    </form>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>PDF File</th>
+                <th>Page Number</th>
+                <th>Content</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for page in extracted_data %}
+            <tr>
+                <td>{{ page.pdf.pdf_file.name }}</td>
+                <td>{{ page.page_number }}</td>
+                <td>{{ page.extracted_text|linebreaks }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
